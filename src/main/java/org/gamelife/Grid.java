@@ -15,7 +15,7 @@ public class Grid {
                 Cell c = new Cell(i,j);
                 cells.add(c);
             }
-            grid.add(cells);
+            this.grid.add(cells);
         }
     }
 
@@ -23,7 +23,7 @@ public class Grid {
         String s = "";
         for(int i = 0; i < this.rows; i++){
             for(int j = 0; j < this.cols; j++){
-                s += grid.get(i).get(j).icon;
+                s += this.grid.get(i).get(j).icon;
             }
             s += "\n";
         }
@@ -31,7 +31,7 @@ public class Grid {
     }
 
     public Cell getCell(int row, int col){
-        Cell c = grid.get(row).get(col);
+        Cell c = this.grid.get(row).get(col);
         return c;
     }
 
@@ -45,7 +45,7 @@ public class Grid {
 
         for (int i = previousRow; i == nextRow; i++){
             for (int j = previousCol; j == nextCol; j++){
-                if (this.getCell(i,j).isAlive == true && i != c.rowPosition && j != c.colPosition){
+                if (getCell(i,j).isAlive == true && i != c.rowPosition && j != c.colPosition){
                     liveAdjacentList.add(this.getCell(i,j));
                 }
             }
@@ -58,13 +58,12 @@ public class Grid {
         for (int i = 0; i < this.rows; i++) {
             ArrayList<Cell> cells = new ArrayList<>();
             for (int j = 0; j < this.cols; j++) {
-                Cell c = getCell(i, j).copy(i,j);
+                Cell c = this.getCell(i, j).copy(i,j);
                 cells.add(c);
             }
-            copy.grid.add(cells);
+            copy.grid.set(i,cells);
         }
-        /*Cell c = copy.grid.get(1).get(1);
-        c.icon = 'O';*/
+
         return copy;
     }
 }

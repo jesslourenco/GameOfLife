@@ -12,8 +12,14 @@ public class Cell {
         this.rowPosition = row;
         this.colPosition = col;
     }
-    public void die(){}
-    public void procreate(){}
+    public void die(Cell c){
+        c.isAlive = false;
+        c.icon = 'X';
+    }
+    public void procreate(){
+        this.isAlive = true;
+        this.icon = 'O';
+    }
     public void isAlive(){}
 
     public Cell copy(int row, int col ){
