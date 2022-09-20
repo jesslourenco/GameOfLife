@@ -12,7 +12,7 @@ public class Grid {
         for(int i = 0; i < rows; i++){
             ArrayList<Cell> cells = new ArrayList<>();
             for(int j = 0; j < cols; j++){
-                Cell c = new Cell();
+                Cell c = new Cell(i,j);
                 cells.add(c);
             }
             grid.add(cells);
@@ -35,20 +35,36 @@ public class Grid {
         return c;
     }
 
-    public void getAdjacentCells(Cell c){
+    public ArrayList<Cell> getAdjacentCells(Cell c){
+        int previousRow = c.rowPosition - 1;
+        int nextRow = c.rowPosition + 1;
+        int previousCol = c.colPosition - 1;
+        int nextCol = c.colPosition + 1;
 
+        ArrayList<Cell> liveAdjacentList = new ArrayList<>();
+
+        for (int i = previousRow; i == nextRow; i++){
+            for (int j = previousCol; j == nextCol; j++){
+                if (this.getCell(i,j).isAlive == true && i != c.rowPosition && j != c.colPosition){
+                    liveAdjacentList.add(this.getCell(i,j));
+                }
+            }
+        }
+        return liveAdjacentList;
     }
-    public ArrayList<ArrayList<Cell>> copyGrid() {
-        ArrayList<ArrayList<Cell>> copy = new ArrayList<>();
+
+    public Grid copyGrid(){
+        Grid copy =  new Grid(this.rows, this.cols);
         for (int i = 0; i < this.rows; i++) {
             ArrayList<Cell> cells = new ArrayList<>();
             for (int j = 0; j < this.cols; j++) {
-                Cell c = getCell(i, j);
+                Cell c = getCell(i, j).copy(i,j);
                 cells.add(c);
             }
-            copy.add(cells);
+            copy.grid.add(cells);
         }
+        /*Cell c = copy.grid.get(1).get(1);
+        c.icon = 'O';*/
         return copy;
     }
-
 }
