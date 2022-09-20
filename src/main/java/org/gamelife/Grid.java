@@ -15,7 +15,7 @@ public class Grid {
                 Cell c = new Cell(i,j);
                 cells.add(c);
             }
-            this.grid.add(cells);
+            grid.add(cells);
         }
     }
 
@@ -23,7 +23,7 @@ public class Grid {
         String s = "";
         for(int i = 0; i < this.rows; i++){
             for(int j = 0; j < this.cols; j++){
-                s += this.grid.get(i).get(j).icon;
+                s += grid.get(i).get(j).icon;
             }
             s += "\n";
         }
@@ -31,7 +31,7 @@ public class Grid {
     }
 
     public Cell getCell(int row, int col){
-        Cell c = this.grid.get(row).get(col);
+        Cell c = grid.get(row).get(col);
         return c;
     }
 
