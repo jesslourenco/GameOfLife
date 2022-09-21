@@ -8,19 +8,18 @@ public class Cell {
 
     public Cell(int row, int col){
         this.isAlive = false;
-        this.icon = 'X';
+        this.icon = ' ';
         this.rowPosition = row;
         this.colPosition = col;
     }
-    public void die(Cell c){
-        c.isAlive = false;
-        c.icon = 'X';
+    public void die(){
+        isAlive = false;
+        icon = ' ';
     }
     public void procreate(){
         this.isAlive = true;
-        this.icon = 'O';
+        this.icon = '▄';
     }
-    public void isAlive(){}
 
     public Cell copy(int row, int col ){
         Cell c = new Cell(row, col);

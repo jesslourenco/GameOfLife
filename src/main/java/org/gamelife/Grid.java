@@ -2,8 +2,8 @@ package org.gamelife;
 import java.util.*;
 
 public class Grid {
-    private int cols;
-    private int rows;
+    int cols;
+    int rows;
     ArrayList<ArrayList<Cell>> grid = new ArrayList<>();
 
     Grid(int rows, int cols){
@@ -37,16 +37,31 @@ public class Grid {
 
     public ArrayList<Cell> getAdjacentCells(Cell c){
         int previousRow = c.rowPosition - 1;
-        int nextRow = c.rowPosition + 1;
+        int nextRow = c.rowPosition + 2;
         int previousCol = c.colPosition - 1;
-        int nextCol = c.colPosition + 1;
+        int nextCol = c.colPosition + 2;
 
         ArrayList<Cell> liveAdjacentList = new ArrayList<>();
 
-        for (int i = previousRow; i == nextRow; i++){
-            for (int j = previousCol; j == nextCol; j++){
-                if (getCell(i,j).isAlive == true && i != c.rowPosition && j != c.colPosition){
-                    liveAdjacentList.add(this.getCell(i,j));
+        if (previousRow < 0){
+            previousRow = c.rowPosition;
+        }
+        if (previousCol < 0) {
+            previousCol = c.colPosition;
+        }
+        if (nextRow > this.rows){
+            nextRow = c.rowPosition + 1;
+        }
+        if (nextCol > this.cols) {
+            nextCol = c.colPosition + 1;
+        }
+
+        for (int i = previousRow; i < nextRow; i++){
+            for (int j = previousCol; j < nextCol; j++){
+                if (this.getCell(i,j).isAlive){
+                    if (this.getCell(i,j) != this.getCell(c.rowPosition, c.colPosition)){
+                        liveAdjacentList.add(this.getCell(i,j));
+                    }
                 }
             }
         }
@@ -63,7 +78,6 @@ public class Grid {
             }
             copy.grid.set(i,cells);
         }
-
         return copy;
     }
 }
